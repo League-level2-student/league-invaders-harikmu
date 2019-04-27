@@ -124,6 +124,19 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 		if (currentState == MENU_STATE && e.getKeyCode() == 32) {
 			JOptionPane.showMessageDialog(null, "use arrow keys to move and space to fire");
 		}
+		if (e.getKeyCode() == 38) {
+			
+			rocketship.up();
+		}
+		if (e.getKeyCode() == 40) {
+			rocketship.down();
+		}
+		if (e.getKeyCode() == 37) {
+			rocketship.left();
+		}
+		if (e.getKeyCode() == 39) {
+			rocketship.right();
+		}
 	}
 
 	@Override
