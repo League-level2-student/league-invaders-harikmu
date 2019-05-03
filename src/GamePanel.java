@@ -10,7 +10,6 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.Timer;
 
-
 public class GamePanel extends JPanel implements ActionListener, KeyListener {
 	private Timer timer;
 	private Font titleFont;
@@ -20,6 +19,7 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 	private Font font4;
 	private Font font5;
 	private Rocketship rocketship;
+
 	public GamePanel() {
 		timer = new Timer(1000 / 60, this);
 		titleFont = new Font("Arial", Font.PLAIN, 60);
@@ -61,7 +61,7 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 	}
 
 	void updateEndState(Graphics g) {
-	
+
 	}
 
 	void drawMenuState(Graphics g) {
@@ -69,13 +69,13 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 		g.fillRect(0, 0, LeagueInvaders.WIDTH, LeagueInvaders.HEIGHT);
 		g.setFont(titleFont);
 		g.setColor(Color.WHITE);
-		g.drawString("league invaders",40,100);
+		g.drawString("league invaders", 40, 100);
 		g.setFont(font2);
 		g.setColor(Color.WHITE);
-		g.drawString("press *enter* to start",100,300);
+		g.drawString("press *enter* to start", 100, 300);
 		g.setFont(font3);
 		g.setColor(Color.WHITE);
-		g.drawString("press *space* for instructions",43,500);
+		g.drawString("press *space* for instructions", 43, 500);
 	}
 
 	void drawGameState(Graphics g) {
@@ -89,13 +89,13 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 		g.fillRect(0, 0, LeagueInvaders.WIDTH, LeagueInvaders.HEIGHT);
 		g.setFont(titleFont2);
 		g.setColor(Color.WHITE);
-		g.drawString("game over",110,100);
+		g.drawString("game over", 110, 100);
 		g.setFont(font4);
 		g.setColor(Color.WHITE);
-		g.drawString("you killed " + "0 enemies",105,300);
+		g.drawString("you killed " + "0 enemies", 105, 300);
 		g.setFont(font5);
 		g.setColor(Color.WHITE);
-		g.drawString("press *enter* to restart",88,500);		
+		g.drawString("press *enter* to restart", 88, 500);
 	}
 
 	@Override
@@ -125,21 +125,32 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 			JOptionPane.showMessageDialog(null, "use arrow keys to move and space to fire");
 		}
 		if (e.getKeyCode() == 38) {
-			
-			rocketship.up();
+			rocketship.up = true;
 		}
 		if (e.getKeyCode() == 40) {
-			rocketship.down();
+			rocketship.down = true;
 		}
 		if (e.getKeyCode() == 37) {
-			rocketship.left();
+			rocketship.left = true;
 		}
 		if (e.getKeyCode() == 39) {
-			rocketship.right();
+			rocketship.right = true;
 		}
 	}
 
 	@Override
 	public void keyReleased(KeyEvent e) {
+		if (e.getKeyCode() == 38) {
+			rocketship.up = false;
+		}
+		if (e.getKeyCode() == 40) {
+			rocketship.down = false;
+		}
+		if (e.getKeyCode() == 37) {
+			rocketship.left = false;
+		}
+		if (e.getKeyCode() == 39) {
+			rocketship.right = false;
+		}
 	}
 }
