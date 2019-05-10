@@ -1,15 +1,16 @@
 import java.awt.Graphics;
 
 public class ObjectManager {
-	private Rocketship rocketship2;
+	private Rocketship rocketship;
 
-	public ObjectManager(Rocketship rocketship2) {
-		rocketship2 = new Rocketship(250, 700, 50, 50);
+	public ObjectManager(Rocketship rocketship) {
+		this.rocketship = rocketship;
 	}
 
 	void update() {
-		rocketship2.update();
+		rocketship.update();
 	}
 	void draw(Graphics g) {
+		rocketship.draw(g);
 	}
 }
