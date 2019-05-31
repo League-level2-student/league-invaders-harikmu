@@ -6,7 +6,7 @@ public class Aliens extends GameObject {
 
 	public Aliens(int x, int y, int width, int height) {
 		super(x, y, width, height);
-		speed = 10;
+		speed = 1;
 	}
 
 	void update() {

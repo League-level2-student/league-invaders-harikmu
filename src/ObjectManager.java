@@ -1,9 +1,11 @@
 import java.awt.Graphics;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Random;
 
-public class ObjectManager {
+public class ObjectManager implements ActionListener {
 	private Rocketship rocketship;
 	ArrayList<Projectile> projectiles = new ArrayList<Projectile>();
 	ArrayList<Aliens> aliens = new ArrayList<Aliens>();
@@ -42,21 +44,33 @@ public class ObjectManager {
 		projectiles.add(p);
 	}
 
-	void addAliens(Aliens a) {
+	void addAliens() {
 		aliens.add(new Aliens(random.nextInt(LeagueInvaders.WIDTH), 0, 50, 50));
 	}
 
 	public void manageEnemies() {
 		if (System.currentTimeMillis() - enemyTimer >= enemySpawnTime) {
-			addAliens(new Aliens(new Random().nextInt(LeagueInvaders.WIDTH), 0, 50, 50));
+			addAliens();
 
 			enemyTimer = System.currentTimeMillis();
 		}
 	}
 
 	public void purgeObjects() {
-		for (int i = 0; i < projectiles.size(); i++) {
-
+		for (int i = projectiles.size() - 1; i >= 0; i--) {
+			if (projectiles.get(i).isAlive == false) {
+				projectiles.remove(i);
+			}
 		}
+		for (int i = aliens.size() - 1; i >= 0; i--) {
+			if (aliens.get(i).isAlive == false) {
+				aliens.remove(i);
+			}
+		}
+	}
+
+	@Override
+	public void actionPerformed(ActionEvent e) {
+		addAliens();
 	}
 }
