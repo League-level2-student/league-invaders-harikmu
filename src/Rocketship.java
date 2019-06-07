@@ -23,6 +23,7 @@ public class Rocketship extends GameObject {
 	}
 
 	void update() {
+		super.update();
 		if (up == true) {
 			if (!(y < 0)) {
 				y -= speed;
@@ -68,4 +69,7 @@ public class Rocketship extends GameObject {
 			x += speed;
 		}
 	}
+	public Projectile getProjectile() {
+        return new Projectile(x+width/2, y, 10, 10);
+} 
 }

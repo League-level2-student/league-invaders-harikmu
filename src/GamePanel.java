@@ -20,7 +20,6 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 	private Font font5;
 	private Rocketship rocketship;
 	private ObjectManager objectmanager;
-	private Timer alienSpawn;
 
 	public GamePanel() {
 		timer = new Timer(1000 / 60, this);
@@ -32,6 +31,7 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 		font5 = new Font("Arial", Font.PLAIN, 32);
 		rocketship = new Rocketship(250, 700, 50, 50);
 		objectmanager = new ObjectManager(rocketship);
+
 	}
 
 	final int MENU_STATE = 0;
@@ -50,7 +50,6 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 		}
 		repaint();
 	}
-
 	void startGame() {
 		timer.start();
 	}
@@ -62,6 +61,11 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 	void updateGameState() {
 		objectmanager.update();
 		objectmanager.manageEnemies();
+		objectmanager.checkCollision();
+		objectmanager.purgeObjects();
+		if (rocketship.isAlive == false) {
+			currentState = END_STATE;
+		}
 	}
 
 	void updateEndState() {
@@ -141,14 +145,9 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 			rocketship.right = true;
 		}
 		if (e.getKeyCode() == 32) {
-			objectmanager.addProjectile(new Projectile(rocketship.x + 20, rocketship.y, 10, 10));
+			objectmanager.addProjectile(rocketship.getProjectile());
 		}
-		if (currentState == GAME_STATE) {
-			startGame();
-		}
-		if (currentState == END_STATE) {
-			alienSpawn.stop();
-		}
+
 	}
 
 	@Override
@@ -166,8 +165,5 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 			rocketship.right = false;
 		}
 	}
-	public void startGame1() {
-		alienSpawn = new Timer(1000,objectmanager);
-		alienSpawn.start();
-	}
+
 }

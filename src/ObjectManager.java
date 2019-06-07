@@ -5,6 +5,8 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Random;
 
+import javax.swing.Timer;
+
 public class ObjectManager implements ActionListener {
 	private Rocketship rocketship;
 	ArrayList<Projectile> projectiles = new ArrayList<Projectile>();
@@ -12,14 +14,18 @@ public class ObjectManager implements ActionListener {
 	long enemyTimer;
 	int enemySpawnTime;
 	Random random;
+	int score;
 
 	public ObjectManager(Rocketship rocketship) {
 		this.rocketship = rocketship;
 		enemyTimer = 0;
 		random = new Random();
-
+		enemySpawnTime = 1000;
+		score = 0;
 	}
-
+	int GetScore() {
+		return score;
+	}
 	void update() {
 		rocketship.update();
 		for (int i = 0; i < projectiles.size(); i++) {
@@ -69,8 +75,22 @@ public class ObjectManager implements ActionListener {
 		}
 	}
 
+	public void checkCollision() {
+		for (Aliens a : aliens) {
+			if (rocketship.collisionBox.intersects(a.collisionBox)) {
+				rocketship.isAlive = false;
+			}
+			for (int i = 0; i < projectiles.size(); i++) {
+				if (projectiles.get(i).collisionBox.intersects(a.collisionBox)) {
+				a.isAlive = false;
+			}
+			}
+			
+		}
+	}
+
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		addAliens();
 	}
+
 }
