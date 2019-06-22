@@ -50,6 +50,7 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 		}
 		repaint();
 	}
+
 	void startGame() {
 		timer.start();
 	}
@@ -80,10 +81,10 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 		g.drawString("league invaders", 40, 100);
 		g.setFont(font2);
 		g.setColor(Color.WHITE);
-		g.drawString("press *enter* to start", 100, 300);
+		g.drawString("press enter to start", 100, 300);
 		g.setFont(font3);
 		g.setColor(Color.WHITE);
-		g.drawString("press *space* for instructions", 43, 500);
+		g.drawString("press space for instructions", 43, 500);
 	}
 
 	void drawGameState(Graphics g) {
@@ -100,10 +101,10 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 		g.drawString("game over", 110, 100);
 		g.setFont(font4);
 		g.setColor(Color.WHITE);
-		g.drawString("you killed " + "0 enemies", 105, 300);
+		g.drawString("you killed " + objectmanager.GetScore() + " enemies", 105, 300);
 		g.setFont(font5);
 		g.setColor(Color.WHITE);
-		g.drawString("press *enter* to restart", 88, 500);
+		g.drawString("press enter to restart", 88, 500);
 	}
 
 	@Override
@@ -123,7 +124,7 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 
 	@Override
 	public void keyPressed(KeyEvent e) {
-		if (e.getKeyCode() == 10) {
+		if (e.getKeyCode() == KeyEvent.VK_ENTER) {
 			currentState++;
 		}
 		if (currentState > END_STATE) {
@@ -146,6 +147,10 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 		}
 		if (e.getKeyCode() == 32) {
 			objectmanager.addProjectile(rocketship.getProjectile());
+		}
+		if (e.getKeyCode() == KeyEvent.VK_ENTER && currentState == MENU_STATE) {
+			rocketship = new Rocketship(250, 700, 50, 50);
+			objectmanager = new ObjectManager(rocketship);
 		}
 
 	}
