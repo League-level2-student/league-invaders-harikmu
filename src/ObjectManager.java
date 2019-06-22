@@ -83,7 +83,7 @@ public class ObjectManager implements ActionListener {
 			for (int i = 0; i < projectiles.size(); i++) {
 				if (projectiles.get(i).collisionBox.intersects(a.collisionBox)) {
 				a.isAlive = false;
-				score=score+1;
+				score++;
 			}
 			}
 			
