@@ -1,6 +1,7 @@
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.Graphics;
+import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
@@ -8,6 +9,7 @@ import java.awt.event.KeyListener;
 import java.awt.image.BufferedImage;
 
 import javax.imageio.ImageIO;
+import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.Timer;
@@ -27,7 +29,10 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 	public static boolean gotImage = false;	
 
 	public GamePanel() {
-		timer = new Timer(1000 / 60, this);
+		//if (needImage) {
+		   //loadImage ("space.png");
+	//	}
+        timer = new Timer(1000 / 60, this);
 		titleFont = new Font("Arial", Font.PLAIN, 60);
 		font2 = new Font("Arial", Font.PLAIN, 32);
 		font3 = new Font("Arial", Font.PLAIN, 32);
@@ -36,10 +41,7 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 		font5 = new Font("Arial", Font.PLAIN, 32);
 		rocketship = new Rocketship(250, 700, 50, 50);
 		objectmanager = new ObjectManager(rocketship);
-		if (needImage) {
-		    loadImage ("space.png");
-		}
-
+		
 	}
 
 	final int MENU_STATE = 0;
@@ -58,6 +60,7 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 		}
 		repaint();
 	}
+
 	void loadImage(String imageFile) {
 	    if (needImage) {
 	        try {
@@ -100,7 +103,7 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 		g.drawString("league invaders", 40, 100);
 		g.setFont(font2);
 		g.setColor(Color.WHITE);
-		g.drawString("press enter to start", 100, 300);
+		g.drawString("   press enter to start", 100, 300);
 		g.setFont(font3);
 		g.setColor(Color.WHITE);
 		g.drawString("press space for instructions", 43, 500);
