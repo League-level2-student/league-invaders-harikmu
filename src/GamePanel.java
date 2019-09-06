@@ -29,9 +29,9 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 	public static boolean gotImage = false;	
 
 	public GamePanel() {
-		//if (needImage) {
-		   //loadImage ("space.png");
-	//	}
+		if (needImage) {
+		   loadImage ("space.png");
+		}
         timer = new Timer(1000 / 60, this);
 		titleFont = new Font("Arial", Font.PLAIN, 60);
 		font2 = new Font("Arial", Font.PLAIN, 32);
@@ -103,10 +103,10 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 		g.drawString("league invaders", 40, 100);
 		g.setFont(font2);
 		g.setColor(Color.WHITE);
-		g.drawString("   press enter to start", 100, 300);
+		g.drawString(" press enter to start", 100, 300);
 		g.setFont(font3);
 		g.setColor(Color.WHITE);
-		g.drawString("press space for instructions", 43, 500);
+		g.drawString(" press space for instructions", 43, 500);
 	}
 
 	void drawGameState(Graphics g) {
@@ -129,7 +129,7 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 		g.drawString("you killed " + objectmanager.GetScore() + " enemies", 105, 300);
 		g.setFont(font5);
 		g.setColor(Color.WHITE);
-		g.drawString("press enter to restart", 88, 500);
+		g.drawString("  press enter to restart", 88, 500);
 	}
 
 	@Override
