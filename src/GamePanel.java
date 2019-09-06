@@ -114,8 +114,9 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 			g.drawImage(image, 0, 0, LeagueInvaders.WIDTH, LeagueInvaders.HEIGHT, null);
 		} else {
 		g.setColor(Color.BLACK);
+		}	
 		objectmanager.draw(g);
-		}
+
 	}
 
 	void drawEndState(Graphics g) {
